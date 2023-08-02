@@ -14,10 +14,21 @@ public class HelloControllerTest {
 
     @Test
     public void testHello() {
-
         // Act
         String response = controller.hello();
         // Assert
         assertEquals("Hello World!", response);
+    }
+
+    @Test
+    public void testHiName() {
+        String response = controller.hiName("var");
+        assertEquals("Hello var", response);
+    }
+
+    @Test
+    public void testSum(){
+        int response = controller.sum(5, 10);
+        assertEquals(15,response);
     }
 }
