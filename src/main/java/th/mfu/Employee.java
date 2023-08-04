@@ -2,15 +2,18 @@ package th.mfu;
 
 import java.util.Date;
 
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Entity
 public class Employee {
-    @JsonProperty("id")
+    @Id
+    @GeneratedValue(strategy =GenerationType.AUTO)
     private long id;
 
     @JsonProperty("fistName")
-    private String fistName;
+    private String firstName;
 
     @JsonProperty("lastName")
     private String lastName;
@@ -24,7 +27,7 @@ public class Employee {
 
     public Employee(long id, String fistName, String lastName, Date birthDay, long salary) {
         this.id = id;
-        this.fistName = fistName;
+        this.firstName = fistName;
         this.lastName = lastName;
         this.birthDay = birthDay;
         this.salary = salary;
@@ -38,12 +41,12 @@ public class Employee {
         this.id = id;
     }
 
-    public String getFistName() {
-        return fistName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
