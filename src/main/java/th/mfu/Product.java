@@ -1,45 +1,63 @@
-package th.mfu;
+// package th.mfu;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+// import javax.persistence.*;
+// import javax.persistence.GeneratedValue;
+// import javax.persistence.GenerationType;
 
-public class Product {
-    @JsonProperty("productName")
-    private String productName;
+// import com.fasterxml.jackson.annotation.JsonProperty;
 
-    @JsonProperty("description")
-    private String description;
+// @Entity
+// public class Product {
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.AUTO)
+//     private Long PId;
 
-    @JsonProperty("price")
-    private Long price;
+//     @JsonProperty("productName")
+//     private String productName;
 
-    public Product(String productName, String description, Long price) {
-        this.productName = productName;
-        this.description = description;
-        this.price = price;
-    }
+//     @JsonProperty("description")
+//     private String description;
 
-    public String getProductName() {
-        return productName;
-    }
+//     @JsonProperty("price")
+//     private Long price;
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
+//     public Product(Long PId, String productName, String description, Long price) {
+//         this.PId = PId;
+//         this.productName = productName;
+//         this.description = description;
+//         this.price = price;
+//     }
 
-    public String getDescription() {
-        return description;
-    }
+//     public String getProductName() {
+//         return productName;
+//     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+//     public void setProductName(String productName) {
+//         this.productName = productName;
+//     }
 
-    public Long getPrice() {
-        return price;
-    }
+//     public String getDescription() {
+//         return description;
+//     }
 
-    public void setPrice(Long price) {
-        this.price = price;
-    }
+//     public void setDescription(String description) {
+//         this.description = description;
+//     }
 
-}
+//     public Long getPrice() {
+//         return price;
+//     }
+
+//     public void setPrice(Long price) {
+//         this.price = price;
+//     }
+
+//     public Long getPId() {
+//         return PId;
+//     }
+
+//     public void setPId(Long pId) {
+//         PId = pId;
+//     }
+
+// }

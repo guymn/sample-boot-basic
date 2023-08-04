@@ -2,67 +2,72 @@ package th.mfu;
 
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Employee {
+
     @Id
-    @GeneratedValue(strategy =GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @JsonProperty("fistName")
-    private String firstName;
+    @JsonProperty("firstname")
+    private String firstname;
 
-    @JsonProperty("lastName")
-    private String lastName;
+    @JsonProperty("lastname")
+    private String lastname;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @JsonProperty("birthDay")
-    private Date birthDay;
-
-    @JsonProperty("salary")
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date birthday;
     private long salary;
 
-    public Employee(long id, String fistName, String lastName, Date birthDay, long salary) {
+    public Employee() {
+    }
+
+    public Employee(Long id, String firstname, String lastname, Date birthday, long salary) {
         this.id = id;
-        this.firstName = fistName;
-        this.lastName = lastName;
-        this.birthDay = birthDay;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthday = birthday;
         this.salary = salary;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public Date getBirthDay() {
-        return birthDay;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public long getSalary() {
