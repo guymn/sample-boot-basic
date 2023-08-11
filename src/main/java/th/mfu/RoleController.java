@@ -18,8 +18,8 @@ public class RoleController {
     @Autowired
     private RoleRespository roleRespository;
 
-    // @Autowired
-    // private AccountRepository accountRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @PostMapping("/roles")
     public ResponseEntity createRole(@RequestBody Role role) {
@@ -38,7 +38,7 @@ public class RoleController {
         }
         Account account = accountopt.get();
         // add role to account
-        Optional<Role> roleopt = roleRepository.findById(roleid);
+        Optional<Role> roleopt = roleRespository.findById(roleid);
         // check if role exists
         if (!roleopt.isPresent()) {
             // return error message 404

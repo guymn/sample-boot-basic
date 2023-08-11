@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -40,10 +39,6 @@ public class Employee {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
-
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "account_role", JoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> role;
 
     public Employee() {
     }
