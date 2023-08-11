@@ -24,7 +24,7 @@ public class EmployeeController {
     // select all employeee
     @GetMapping("/employees")
     public Collection<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+        return employeeRepository.findByOrderByFirstnameAsc();
     }
 
     @GetMapping("/employees/size")
@@ -152,6 +152,16 @@ public class EmployeeController {
 
         // return success message
         return ResponseEntity.ok("Employee deleted");
+    }
+
+    @DeleteMapping("/employees/")
+    public ResponseEntity<String> deleteAllEmployee() {
+        // check if id not exists
+        // delete employee
+        employeeRepository.deleteAll();
+
+        // return success message
+        return ResponseEntity.ok("Employee deleted all");
     }
 
 }
