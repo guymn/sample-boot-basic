@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +21,9 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     // select all employeee
     @GetMapping("/employees")
@@ -85,58 +89,27 @@ public class EmployeeController {
         return ResponseEntity.ok("Employee updated");
     }
 
-    // //update employee with some fields using patch
-    // @PatchMapping("/employees/{id}")
-    // public ResponseEntity<String> patchEmployee(@PathVariable long id,
-    // @RequestBody HashMap<String, Object> fieldstoupdate){
-    // //check if id not exists
-    // if(!employeesDB.containsKey(id)){
-    // //return error message
-    // return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not
-    // found");
-    // }
+    // partial update employee with some fields using patch
+    @PatchMapping("/employees/{id}")
+    public ResponseEntity<String> patchEmployee(@PathVariable long id, @RequestBody EmployeeDTO empDto) {
+        // find employee by id
+        Optional<Employee> optEmployee = employeeRepository.findById(id);
+        // check if id exists
+        if (!optEmployee.isPresent()) {
+            // return error message
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found");
+        }
+        // get employee from db
+        Employee emp = optEmployee.get();
 
-    // //get employee from db
-    // Employee emp = employeesDB.get(id);
-    // //loop throught fields to update
-    // fieldstoupdate.forEach((key,value) -> {
-    // //check if field is firstname
-    // if(key.equals("first_name")){
-    // //update firstname
-    // emp.setFirstname((String)value);
-    // }
-    // //check if field is lastname
-    // if(key.equals("last_name")){
-    // //update lastname
-    // emp.setLastname((String)value);
-    // }
+        // update employee by using mapper from dto
+        employeeMapper.updateEmployeeFromDto(empDto, emp);
 
-    // //check if field is salary
-    // if(key.equals("salary")){
-    // //update salary
-    // emp.setSalary(Long.valueOf(""+value));
-    // }
+        // save to db
+        employeeRepository.save(emp);
 
-    // //check if field is birthday
-    // if(key.equals("birthday")){
-    // //update birthday
-    // SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
-    // try {
-    // emp.setBirthday(formatter.parse((String)value));
-    // } catch (ParseException e) {
-    // e.printStackTrace();
-    // }
-    // }
-
-    // });
-
-    // //update employee
-    // employeesDB.put(id, emp);
-
-    // //return success message
-    // return ResponseEntity.ok("Employee updated");
-    // }
+        return ResponseEntity.ok("Employee updated");
+    }
 
     // delete employee
     @DeleteMapping("/employees/{id}")
